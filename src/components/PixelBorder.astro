@@ -1,0 +1,13 @@
+---
+interface Props {
+  accent?: boolean;
+  class?: string;
+}
+
+const { accent = false, class: className = "" } = Astro.props;
+const borderClass = accent ? "pixel-border-accent" : "pixel-border";
+---
+
+<div class:list={[borderClass, className]}>
+  <slot />
+</div>

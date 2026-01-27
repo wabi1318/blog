@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from "astro:content";
+import PostLayout from "../../layouts/PostLayout.astro";
+import { getPostDate } from "../../utils/getPostDate";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => data.draft !== true);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const resolvedDate = getPostDate(post.data.date, `src/content/blog/${post.id}.md`);
+---
+
+<PostLayout
+  title={post.data.title}
+  date={resolvedDate}
+  tags={post.data.tags}
+  description={post.data.description}
+  ogImage={post.data.ogImage}
+>
+  <Content />
+</PostLayout>

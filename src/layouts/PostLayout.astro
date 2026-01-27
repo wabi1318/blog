@@ -1,0 +1,36 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import TagList from "../components/TagList.astro";
+
+interface Props {
+  title: string;
+  date: Date;
+  tags: string[];
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, date, tags, description, ogImage } = Astro.props;
+
+function formatDate(d: Date): string {
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+---
+
+<BaseLayout title={`${title} | Blog`} description={description} ogImage={ogImage}>
+  <article class="post-article">
+    <header class="post-header">
+      <h1 class="post-title">{title}</h1>
+      <div class="post-meta">
+        <time datetime={formatDate(date)}>{formatDate(date)}</time>
+        <TagList tags={tags} />
+      </div>
+    </header>
+    <div class="post-content">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

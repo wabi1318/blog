@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import { getSortedPosts } from "../utils/getSortedPosts";
+
+const posts = await getSortedPosts();
+---
+
+<BaseLayout title="Blog">
+  <h1 class="page-heading">Posts</h1>
+  <ul class="post-list">
+    {posts.map((post) => (
+      <PostCard
+        slug={post.id}
+        title={post.data.title}
+        date={post.resolvedDate}
+      />
+    ))}
+  </ul>
+</BaseLayout>
