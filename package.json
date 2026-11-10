@@ -8,11 +8,14 @@
     "build": "astro build",
     "preview": "astro preview"
   },
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "dependencies": {
-    "astro": "^5.7.10"
+    "astro": "7.2.8"
   },
   "devDependencies": {
-    "@astrojs/rss": "^4.0.11",
-    "@astrojs/sitemap": "^3.3.1"
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.4"
   }
 }
